@@ -35,6 +35,7 @@ public class ParseApps {
             factory.setNamespaceAware(true);
             XmlPullParser xpp = factory.newPullParser();
             xpp.setInput(new StringReader(xmlData));
+
             int eventType = xpp.getEventType();
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -69,9 +70,7 @@ public class ParseApps {
                             }
                         }
                         break;
-
                     default:
-                        // nothing to do
                 }
                 eventType = xpp.next();
             }

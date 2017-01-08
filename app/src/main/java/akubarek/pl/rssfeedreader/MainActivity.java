@@ -4,9 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,15 +23,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listApps = (ListView) findViewById(R.id.xmlListView);
 
-
         Log.d(TAG, "onCreate: starting AsyncTask");
         DownloadData downloadData = new DownloadData();
         downloadData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml");
-        Log.d(TAG, "onCreate: done");
+        Log.d(TAG, "onCreate: AsyncTask done");
     }
 
+
     private class DownloadData extends AsyncTask <String, Void, String> {
+
         private static final String TAG = "DownloadData";
+
         @Override
         protected String doInBackground(String... params) {
             Log.d(TAG, "doInBackground: starts with: " + params[0]);
@@ -48,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.d(TAG, "onPostExecute: parameter is" + s);
+
             ParseApps parseApps = new ParseApps();
             parseApps.parse(s); // s is what we downloaded
-            ArrayAdapter <FeedEntry> adapter = new ArrayAdapter<FeedEntry>(MainActivity.this, R.layout.list_item, parseApps.getApps());
+            //ArrayAdapter <FeedEntry> adapter = new ArrayAdapter<FeedEntry>(MainActivity.this, R.layout.list_item, parseApps.getApps());
+            //listApps.setAdapter(adapter);
 
+            FeedAdapter adapter = new FeedAdapter(MainActivity.this, R.layout.list_record, parseApps.getApps());
             listApps.setAdapter(adapter);
         }
 
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 int charsRead;
                 char [] inputBuffer = new char[500];
                 while (true) {
-                    charsRead = reader.read(inputBuffer); // how many read from those 500
+                    charsRead = reader.read(inputBuffer); // read everything you have left BUT max 500 characters;
                     if (charsRead < 0) {
                         break;
                     }

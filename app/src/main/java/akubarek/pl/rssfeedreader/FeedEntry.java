@@ -5,6 +5,7 @@ package akubarek.pl.rssfeedreader;
  */
 
 public class FeedEntry {
+
     private String name;
     private String artist;
     private String releaseDate;
@@ -56,6 +57,7 @@ public class FeedEntry {
         return "name=" + name + '\n' +
                 ", artist=" + artist + '\n' +
                 ", releaseDate=" + releaseDate + '\n' +
-                ", imageURL=" + imageURL + '\n';
+                ", imageURL=" + imageURL + '\n' +
+                ", summary=" + summary + '\n';
     }
 }

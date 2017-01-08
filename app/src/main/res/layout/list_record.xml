@@ -8,7 +8,7 @@
 
     <TextView
         android:text="TextView"
-        android:layout_width="352dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/tvName"
         android:textSize="20sp"
@@ -33,7 +33,7 @@
 
     <TextView
         android:text="TextView"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tvSummary"
         android:layout_width="0dp"
         android:layout_marginTop="8dp"
@@ -43,5 +43,8 @@
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:textSize="12sp"
+        android:scrollIndicators="right|end"
+        android:scrollbars="vertical" />
 </android.support.constraint.ConstraintLayout>
